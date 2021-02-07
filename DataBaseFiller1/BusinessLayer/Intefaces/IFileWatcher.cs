@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseFiller1.BuisnessLayer.Intefaces
+namespace DataBaseFiller1.BusinessLayer.Intefaces
 {
     interface IFileWatcher
     {

@@ -1,5 +1,4 @@
-﻿using DataBaseFiller1.BuisnessLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,10 +7,11 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using DataBaseFiller1.BusinessLayer;
 
-namespace DataBaseFiller1.Clients
+namespace ConsoleApp
 {
-    partial class WindowsFileWatcher : ServiceBase
+    public partial class WindowsFileWatcher : ServiceBase
     {
         Observer observer;
         public WindowsFileWatcher()
@@ -21,13 +21,11 @@ namespace DataBaseFiller1.Clients
 
         protected override void OnStart(string[] args)
         {
-            Logger.log.Info("Service started");
             observer = new Observer();
         }
 
         protected override void OnStop()
         {
-            Logger.log.Info("Service stopped");
             observer.Dispose();
         }
     }

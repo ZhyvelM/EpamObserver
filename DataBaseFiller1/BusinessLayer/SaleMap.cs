@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseFiller1.BuisnessLayer
+namespace DataBaseFiller1.BusinessLayer
 {
     class SaleMap : ClassMap<Sale>
     {

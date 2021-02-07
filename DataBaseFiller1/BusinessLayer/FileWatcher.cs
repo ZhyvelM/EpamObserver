@@ -1,4 +1,4 @@
-﻿using DataBaseFiller1.BuisnessLayer.Intefaces;
+﻿using DataBaseFiller1.BusinessLayer.Intefaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseFiller1.BuisnessLayer
+namespace DataBaseFiller1.BusinessLayer
 {
     class FileWatcher : IFileWatcher
     {

@@ -1,28 +1,29 @@
-﻿using DatabaseFiller1.Model;
-using DataBaseFiller1;
-using DataBaseFiller1.BuisnessLayer;
-using DataBaseFiller1.BuisnessLayer.Intefaces;
-using DataBaseFiller1.Clients;
+﻿using DataBaseFiller1.BusinessLayer;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.ServiceProcess;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DatabaseFiller1
+namespace ConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
+
             if (!Environment.UserInteractive)
             {
-                Logger.log.Info("UserNotInteractive mod");
-                using (var service = new WindowsFileWatcher())
+                ServiceBase[] ServicesToRun;
+                ServicesToRun = new ServiceBase[]
                 {
-                    ServiceBase.Run(service);
-                }
+                    new WindowsFileWatcher()
+                };
+                ServiceBase.Run(ServicesToRun);
             }
             else
             {
-                Logger.log.Info("Console app started");
                 using (Observer obs = new Observer())
                 {
                     Console.WriteLine("Press 'q' to quit the sample.");
@@ -30,6 +31,5 @@ namespace DatabaseFiller1
                 }
             }
         }
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿using DatabaseFiller1.DataAccessLayer;
 using DatabaseFiller1.DataAccessLayer.interfaces;
 using DatabaseFiller1.Model;
-using DataBaseFiller1.BuisnessLayer.Intefaces;
+using DataBaseFiller1.BusinessLayer.Intefaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DataBaseFiller1.BuisnessLayer
+namespace DataBaseFiller1.BusinessLayer
 {
-    class Observer : IDisposable
+    public class Observer : IDisposable
     {
         FileWatcher FW;
         Parser parser;
@@ -26,11 +26,6 @@ namespace DataBaseFiller1.BuisnessLayer
             db.SetConnection();
             FW = new FileWatcher();
             FW.Created += FileAdded;
-        }
-
-        ~Observer()
-        {
-            db.CloseConnection();
         }
 
         public void Dispose()

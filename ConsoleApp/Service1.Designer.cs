@@ -1,4 +1,4 @@
-﻿namespace DataBaseFiller1.Clients
+﻿namespace ConsoleApp
 {
     partial class WindowsFileWatcher
     {
@@ -32,7 +32,7 @@
             // Service1
             // 
             this.CanPauseAndContinue = true;
-            this.ServiceName = "epamObserver";
+            this.ServiceName = "FolderObserver";
 
         }
 
