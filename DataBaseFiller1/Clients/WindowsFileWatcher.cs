@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace DataBaseFiller1.Clients
 {
-    partial class Service1 : ServiceBase
+    partial class WindowsFileWatcher : ServiceBase
     {
         Observer observer;
-        public Service1()
+        public WindowsFileWatcher()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace DataBaseFiller1.Clients
         protected override void OnStop()
         {
             Logger.log.Info("Service stopped");
-            observer = null;
+            observer.Dispose();
         }
     }
 }

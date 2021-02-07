@@ -107,17 +107,18 @@
     <Compile Include="BuisnessLayer\Intefaces\IParser.cs" />
     <Compile Include="BuisnessLayer\Observer.cs" />
     <Compile Include="BuisnessLayer\Parser.cs" />
-    <Compile Include="Clients\Service1.cs">
+    <Compile Include="BuisnessLayer\SaleMap.cs" />
+    <Compile Include="Clients\WindowsFileWatcher.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Clients\Service1.Designer.cs">
-      <DependentUpon>Service1.cs</DependentUpon>
+    <Compile Include="Clients\WindowsFileWatcher.Designer.cs">
+      <DependentUpon>WindowsFileWatcher.cs</DependentUpon>
     </Compile>
     <Compile Include="DataAccessLayer\DbDA.cs" />
     <Compile Include="DataAccessLayer\Interfaces\IDbDA.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Model\Sale.cs" />
-    <Compile Include="Model\SaleContext.cs" />
+    <Compile Include="DataAccessLayer\SaleContext.cs" />
     <Compile Include="Clients\Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -132,8 +133,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Clients\Service1.resx">
-      <DependentUpon>Service1.cs</DependentUpon>
+    <EmbeddedResource Include="Clients\WindowsFileWatcher.resx">
+      <DependentUpon>WindowsFileWatcher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>

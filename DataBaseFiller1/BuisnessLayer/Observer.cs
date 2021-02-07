@@ -1,5 +1,6 @@
 ﻿using DatabaseFiller1.DataAccessLayer;
 using DatabaseFiller1.DataAccessLayer.interfaces;
+using DatabaseFiller1.Model;
 using DataBaseFiller1.BuisnessLayer.Intefaces;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DataBaseFiller1.BuisnessLayer
 {
-    class Observer
+    class Observer : IDisposable
     {
         FileWatcher FW;
         Parser parser;
@@ -32,6 +33,14 @@ namespace DataBaseFiller1.BuisnessLayer
             db.CloseConnection();
         }
 
+        public void Dispose()
+        {
+            FW = null;
+            db.CloseConnection();
+            db = null;
+            parser = null;
+        }
+
         private void FileAdded(object sender, FileSystemEventArgs e)
         {
             Logger.log.Info("Event triggered");
@@ -43,7 +52,17 @@ namespace DataBaseFiller1.BuisnessLayer
         {
             try
             {
-                db.AddSalesToDb(parser.GetSales(e.FullPath));
+                List<Sale> sales;
+                using (StreamReader reader = new StreamReader(e.FullPath))
+                {
+                    sales = parser.GetSales(reader);
+                    sales.ForEach(x =>
+                    {
+                        x.SaleManager = Path.GetFileName(e.FullPath).Split('_')[0];
+                    });
+                }
+                db.AddSalesToDb(sales);
+                
             } catch (Exception ex)
             {
                 Logger.log.Error(ex.Message);

@@ -1,6 +1,6 @@
 ﻿namespace DataBaseFiller1.Clients
 {
-    partial class Service1
+    partial class WindowsFileWatcher
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

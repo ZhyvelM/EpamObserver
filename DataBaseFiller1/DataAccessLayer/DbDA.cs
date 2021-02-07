@@ -49,17 +49,15 @@ namespace DatabaseFiller1.DataAccessLayer
                 Logger.log.Info("thread waiting...");
             }
             isUsing = true;
+            if (db == null)
             {
-                if (db == null)
-                {
-                    Logger.log.Error("No connection to data base; use SetConnection() method");
-                }
-                else
-                {
-                    db.Sales.Add(sale);
-                    db.SaveChanges();
-                    Logger.log.Info("sale written to data base: " + sale);
-                }
+                Logger.log.Error("No connection to data base; use SetConnection() method");
+            }
+            else
+            {
+                db.Sales.Add(sale);
+                db.SaveChanges();
+                Logger.log.Info("sale written to data base: " + sale);
             }
             isUsing = false;
         }
@@ -72,18 +70,15 @@ namespace DatabaseFiller1.DataAccessLayer
             }
             List<Sale> sales = new List<Sale>();
             isUsing = true;
+            if (db == null)
             {
-                if (db == null)
-                {
-                    Logger.log.Error("No connection to data base; use SetConnection() method");
-                }
-                else
-                {
-                    sales = db.Sales.ToList();                    
-                }
+                Logger.log.Error("No connection to data base; use SetConnection() method");
+            }
+            else
+            {
+                sales = db.Sales.Where(x => x.ClientName == client).ToList();
             }
             isUsing = false;
-            sales.RemoveAll(o => !client.Equals(o.ClientName));
             if (sales.Count == 0)
             {
                 Logger.log.Info("No sales with that client");
@@ -100,21 +95,18 @@ namespace DatabaseFiller1.DataAccessLayer
             }
             List<Sale> sales = new List<Sale>();
             isUsing = true;
+            if (db == null)
             {
-                if (db == null)
-                {
-                    Logger.log.Error("No connection to data base; use SetConnection() method");
-                }
-                else
-                {
-                    sales = db.Sales.ToList();
-                }
+                Logger.log.Error("No connection to data base; use SetConnection() method");
+            }
+            else
+            {
+                sales = db.Sales.Where(x => x.SaleManager == manager).ToList();
             }
             isUsing = false;
-            sales.RemoveAll(o => !manager.Equals(o.SaleManager));
             if (sales.Count == 0)
             {
-                Logger.log.Info("No sales with that client");
+                Logger.log.Info("No sales with that manager");
                 sales = null;
             }
             return sales ?? null;
@@ -128,32 +120,25 @@ namespace DatabaseFiller1.DataAccessLayer
             }
             List<Sale> sales = new List<Sale>();
             isUsing = true;
+            if (db == null)
             {
-                if (db == null)
-                {
-                    Logger.log.Error("No connection to data base; use SetConnection() method");
-                }
-                else
-                {
-                    sales = db.Sales.ToList();
-                }
+                Logger.log.Error("No connection to data base; use SetConnection() method");
+            }
+            else
+            {
+                sales = db.Sales.Where(x => x.Product.Equals(product)).ToList();
             }
             isUsing = false;
-            sales.RemoveAll(o => !product.Equals(o.Product));
             if (sales.Count == 0)
             {
-                Logger.log.Info("No sales with that client");
-                sales = null;
+                Logger.log.Info("No sales with that product");
             }
-            return sales ?? null;
+            return sales;
         }
 
         public void AddSalesToDb(List<Sale> sale)
         {
-            sale.ForEach(o =>
-            {
-                AddSaleToDb(o);
-            });
+            db.Sales.AddRange(sale);
         }
     }
 }

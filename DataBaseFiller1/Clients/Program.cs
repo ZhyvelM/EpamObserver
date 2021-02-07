@@ -12,9 +12,10 @@ namespace DatabaseFiller1
     {
         static void Main(string[] args)
         {
-            if(!Environment.UserInteractive)
+            if (!Environment.UserInteractive)
             {
-                using (var service = new Service1())
+                Logger.log.Info("UserNotInteractive mod");
+                using (var service = new WindowsFileWatcher())
                 {
                     ServiceBase.Run(service);
                 }
@@ -22,9 +23,11 @@ namespace DatabaseFiller1
             else
             {
                 Logger.log.Info("Console app started");
-                Observer obs = new Observer();
-                Console.WriteLine("Press 'q' to quit the sample.");
-                while (Console.Read() != 'q');
+                using (Observer obs = new Observer())
+                {
+                    Console.WriteLine("Press 'q' to quit the sample.");
+                    while (Console.Read() != 'q') ;
+                }
             }
         }
 
